@@ -56,4 +56,4 @@ El equipo debe entregar un único proyecto completamente funcional,
 organizado, documentado y capaz de ejecutarse sin interrupciones,
 demostrando la correcta aplicación de la programación orientada a
 objetos y el manejo avanzado de excepciones en un entorno sin base de
-datos. '''
+datos.'''
