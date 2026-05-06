@@ -1,0 +1,6 @@
+--- Inicio de nueva sesion de simulacion ---
+[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 2: Cliente: Luis, Garcia, Servicio: , Precio: 15000
+[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 3: Cliente: Pedro, Perez, Servicio: Equipos, Precio: 
+[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 4: Cliente: Elena, Sanchez, Servicio: Equipos, Precio: 
+[2026-05-06 18:00:34] ERROR: Tipo de dato invalido para el precio: se esperaba numero pero se recibio <class 'str'>
+[2026-05-06 18:00:34] ERROR: Tipo de dato invalido para el precio: se esperaba numero pero se recibio <class 'str'>
