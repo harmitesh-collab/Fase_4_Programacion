@@ -1,7 +1,8 @@
 --- Inicio de nueva sesion de simulacion ---
-[2026-05-11 21:43:07] ERROR: Intento 2 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
-[2026-05-11 21:43:07] ERROR: Intento 4 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
-[2026-05-11 21:43:07] ERROR: Intento 5 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
-[2026-05-11 21:43:07] ERROR: Intento 6 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
-[2026-05-11 21:43:07] ERROR: Intento 10 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
-[2026-05-11 21:43:08] ERROR: Intento 11 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:12] ERROR: Intento 3 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:12] ERROR: Intento 5 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:12] ERROR: Intento 6 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:12] ERROR: Intento 9 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:12] ERROR: Intento 10 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:14] ERROR: Intento 13 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:51:15] ERROR: Intento 14 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
