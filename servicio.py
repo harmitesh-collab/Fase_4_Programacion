@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-class Servicio:
-    def __init__(self, tipo, precio):
-        self.tipo = tipo
-        self.precio = precio
-=======
 from abc import ABC, abstractmethod
 
 class Servicio(ABC):
@@ -34,9 +28,9 @@ class ReservaSalas(Servicio):
     
     def validar_parametros(self, duracion: float = 1.0, **kwargs):
         if not isinstance(self.precio_base, (int, float)):
-            raise TypeError(f"El precio debe ser numérico, se recibió: {type(self.precio_base)}")
+            raise TypeError(f"El precio debe ser numerico, se recibio: {type(self.precio_base)}")
         if duracion <= 0:
-            raise ValueError("La duración debe ser mayor a 0 horas")
+            raise ValueError("La duracion debe ser mayor a 0 horas")
         return True
     
     def calcular_costo(self, duracion: float = 1.0, aplicar_iva: bool = False, descuento: float = 0.0, **kwargs) -> float:
@@ -58,9 +52,9 @@ class AlquilerEquipos(Servicio):
     
     def validar_parametros(self, duracion: float = 1.0, **kwargs):
         if not isinstance(self.precio_base, (int, float)):
-            raise TypeError(f"El precio debe ser numérico, se recibió: {type(self.precio_base)}")
+            raise TypeError(f"El precio debe ser numerico, se recibio: {type(self.precio_base)}")
         if duracion < 0.5:
-            raise ValueError("El alquiler mínimo es 0.5 días")
+            raise ValueError("El alquiler minimo es 0.5 dias")
         return True
     
     def calcular_costo(self, duracion: float = 1.0, aplicar_iva: bool = False, descuento: float = 0.0, **kwargs) -> float:
@@ -86,9 +80,9 @@ class AsesoriaEspecializada(Servicio):
     
     def validar_parametros(self, duracion: float = 1.0, **kwargs):
         if not isinstance(self.precio_base, (int, float)):
-            raise TypeError(f"El precio debe ser numérico, se recibió: {type(self.precio_base)}")
+            raise TypeError(f"El precio debe ser numerico, se recibio: {type(self.precio_base)}")
         if duracion < 1.0:
-            raise ValueError("Las asesorías requieren mínimo 1 hora")
+            raise ValueError("Las asesorias requieren minimo 1 hora")
         return True
     
     def calcular_costo(self, duracion: float = 1.0, aplicar_iva: bool = False, descuento: float = 0.0, **kwargs) -> float:
@@ -101,4 +95,3 @@ class AsesoriaEspecializada(Servicio):
     
     def describir(self) -> str:
         return f"{self.tipo} | Nivel: {self.nivel_experto} | ${self.precio_base}/h"
->>>>>>> origin/feature/juan-cartuche

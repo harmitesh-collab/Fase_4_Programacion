@@ -1,6 +1,7 @@
 --- Inicio de nueva sesion de simulacion ---
-[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 2: Cliente: Luis, Garcia, Servicio: , Precio: 15000
-[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 3: Cliente: Pedro, Perez, Servicio: Equipos, Precio: 
-[2026-05-06 18:00:34] ERROR: Datos incompletos en intento 4: Cliente: Elena, Sanchez, Servicio: Equipos, Precio: 
-[2026-05-06 18:00:34] ERROR: Tipo de dato invalido para el precio: se esperaba numero pero se recibio <class 'str'>
-[2026-05-06 18:00:34] ERROR: Tipo de dato invalido para el precio: se esperaba numero pero se recibio <class 'str'>
+[2026-05-11 21:43:07] ERROR: Intento 2 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:43:07] ERROR: Intento 4 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:43:07] ERROR: Intento 5 fallido (Equipos): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:43:07] ERROR: Intento 6 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:43:07] ERROR: Intento 10 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>
+[2026-05-11 21:43:08] ERROR: Intento 11 fallido (Salas): El precio debe ser numerico, se recibio: <class 'str'>

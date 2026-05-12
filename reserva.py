@@ -1,8 +1,8 @@
-import random #TODO: Agregado para simular errores aleatorios en la reserva, se eliminará cuando se integre la lógica real
+import random # Usado para la simulación de 10 operaciones
 
 # Conectamos con las clases necesarias para la reserva
 from cliente import Cliente
-from servicio import Servicio
+from servicio import Servicio, ReservaSalas, AlquilerEquipos, AsesoriaEspecializada
 
 # Obtenemos la hora del sistema para el log
 from datetime import datetime
@@ -24,75 +24,64 @@ class Reserva:
 
 # Creamos la función para registrar errores en el log      
 def registrar_error(mensaje):
-    # 1. Obtenemos la hora exacta del evento
     ahora = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
-    # 2. Abrimos en modo 'a' (para agregar al final)
-    with open("errores.log", "a") as archivo:
-        # 3. Escribimos la línea con formato profesional
+    # Usamos encoding='utf-8' para evitar problemas con tildes
+    with open("errores.log", "a", encoding='utf-8') as archivo:
         archivo.write(f"[{ahora}] ERROR: {mensaje}\n")
+        archivo.flush() # Para escribir inmediatamente en el archivo sin esperar a que se cierre
         
 intentos = 0
 continuar_programa = True
 
-# TODO: Listas de posibles clientes y servicios para simular diferentes escenarios, se eliminarán cuando se integre la lógica real
+# Listas de posibles clientes y servicios para simular diferentes escenarios
 nombres = ["Ana", "Luis", "Marta", "Pedro", "Elena"]
 apellidos = ["Garcia", "Perez", "Lopez", "Sanchez", "Diaz"]
 servicios_disponibles = [
-    Servicio("Salas", 5000), 
-    Servicio("Equipos",""), 
-    Servicio("", 15000),
-    Servicio("Asesorias", "dos mil")
+    ReservaSalas(5000, capacidad=15), 
+    AlquilerEquipos(precio_diario="error_string"), # Para probar el log de errores
+    ReservaSalas(precio_hora="cinco mil"),         # Para probar validación de tipo
+    AsesoriaEspecializada(15000, nivel_experto="Avanzado"),
+    AlquilerEquipos(2000, incluye_soporte=True)
 ]
 
 servicios_fallidos = [] # Lista para almacenar servicios que causaron errores para mostrar en el resumen final
 
 while continuar_programa:
     intentos += 1
-    print(f"Intento #{intentos}")
-    # TODO:Simulación de datos aleatorios para cada intento, incluyendo casos con datos incompletos y tipos de datos incorrectos. Se eliminarán cuando se integre la lógica real de entrada de datos.
+    print(f"\nIntento #{intentos}")
+    
     nombre_elegido = random.choice(nombres)
     apellido_elegido = random.choice(apellidos)
     servicio_elegido = random.choice(servicios_disponibles)
-    if nombre_elegido == "" or apellido_elegido == "" or servicio_elegido.tipo == "" or servicio_elegido.precio == "":
+
+    # Validación de datos incompletos
+    if not nombre_elegido or not apellido_elegido or not servicio_elegido.precio_base:
         errores += 1
-        servicios_fallidos.append(servicio_elegido.tipo) # Guardamos el tipo de servicio que causó el error para mostrarlo al final
-        registrar_error(f"Datos incompletos en intento {intentos}: Cliente: {nombre_elegido}, {apellido_elegido}, Servicio: {servicio_elegido.tipo}, Precio: {servicio_elegido.precio}")
-        print(f"Error registrado en el log por datos incompletos.")
-        continue # Sala a la siguiente iteración sin intentar crear la reserva
-    
-    elif not isinstance(servicio_elegido.precio, (int, float)):
-        errores += 1
-        servicios_fallidos.append(servicio_elegido.tipo) # Guardamos el tipo de servicio que causó el error para mostrarlo al final
-        registrar_error(f"Tipo de dato invalido para el precio: se esperaba numero pero se recibio {type(servicio_elegido.precio)}")
-        print(f"Error registrado en el log por precio no numérico.")
-        continue # Salta a la siguiente iteración sin intentar crear la reserva
-    # Objetos de prueba para simular la creación de reservas
-    cliente_recibido = Cliente(nombre_elegido, apellido_elegido)
-    servicio_recibido = Servicio(servicio_elegido.tipo, servicio_elegido.precio)
-    
+        servicios_fallidos.append(servicio_elegido.tipo)
+        registrar_error(f"Datos incompletos en intento {intentos}")
+        continue
+
     try:
-        # TODO: Cambiar esta línea cuando el compañero 2 integre la lógica de polimorfismo
-        # costo = servicio_recibido.calcular_costo() 
-        #Calculamos el costo usando el objeto recibido
-        # Si 'servicio_recibido' no tiene .precio, aquí saltará al 'except'
-        costo = servicio_recibido.precio 
+        # Primero validamos (esto lanzará TypeError o ValueError si el dato es malo)
+        servicio_elegido.validar_parametros(duracion=2.0)
         
-        # Creamos la reserva
-        nueva_reserva = Reserva(cliente_recibido, servicio_recibido)
+        # Si la validación pasa, calculamos el costo
+        costo = servicio_elegido.calcular_costo(duracion=2.0)
         
-        # 3. Asignamos el costo y actualizamos el estado
-        nueva_reserva.costo_total = costo
-        nueva_reserva.estado = "Confirmada"
+        # Creamos el objeto cliente y la reserva
+        cliente_obj = Cliente(nombre_elegido, apellido_elegido)
+        nueva_reserva = Reserva(cliente_obj, servicio_elegido)
         
         exitos += 1
-        print(f"Éxito: Reserva de {servicio_recibido.tipo} para {cliente_recibido.nombre} {cliente_recibido.apellido}.")
+        print(f"Éxito: {servicio_elegido.describir()} para {cliente_obj.nombre} {cliente_obj.apellido}.")
 
     except Exception as e:
+        # Escribimos el error en el log con detalles del intento y el servicio que falló
         errores += 1
-        registrar_error(f"Error en intento {intentos}: {e}")
-        print(f"Error registrado en el log.")
-
+        mensaje_error = f"Intento {intentos} fallido ({servicio_elegido.tipo}): {str(e)}"
+        registrar_error(mensaje_error)
+        servicios_fallidos.append(servicio_elegido.tipo)
+        print(f"Error detectado y guardado en log: {e}")
     
     if intentos >= 10:
         while True:
